@@ -1,0 +1,52 @@
+-- //This was made by ze_li but he  let me release it on here
+local MainGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
+MainGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local CBar = Instance.new("TextBox", MainGui)
+CBar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CBar.BorderColor3 = Color3.fromRGB(255, 255, 255)
+CBar.BorderSizePixel = 3
+CBar.Position = UDim2.new(0, 0, 0.633333333333, 0)
+CBar.Size = UDim2.new(0, 0, 0, 20)
+CBar.Visible = false
+CBar.Font = Enum.Font.GothamBlack
+CBar.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+CBar.Text = ""
+CBar.TextColor3 = Color3.fromRGB(255, 255, 255)
+CBar.TextSize = 15
+CBar.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+
+local Frame = Instance.new("Frame", MainGui)
+Frame.BackgroundTransparency = 1
+Frame.Position = UDim2.new(0.005, 0, 0, 0)
+Frame.Size = UDim2.new(0, 91, 0, 100)
+
+local UIListLayout = Instance.new("UIListLayout", Frame)
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+local Uis = game:GetService("UserInputService")
+local Ctrl = false
+Uis.InputBegan:Connect(function(Key, Typing)
+    if Typing then return end
+        if Key.KeyCode.Name == "Semicolon" then
+        CBar.Visible = true
+        CBar.Text = ""
+        wait()
+        CBar:CaptureFocus()
+        CBar:TweenSize(UDim2.new(0, 419, 0, 20), "Out", "Quad", 0.1, true)
+    end
+end)
+CBar.FocusLost:Connect(function(Foc)
+    if Foc == true then
+        CBar:TweenSize(UDim2.new(0, 0, 0, 20), "Out", "Quad", 0.1, true)
+        wait()
+        CBar.Visible = false
+        game.GetService(game, "Players"):Chat(Prefix..CBar.Text)
+    end
+end)
+Uis.InputEnded:Connect(function(Key)
+    if Key.KeyCode.Name == "LeftAlt" then
+        Ctrl = false
+        CBar.Visible = false
+    end
+end)
