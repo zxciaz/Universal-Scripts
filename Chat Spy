@@ -1,0 +1,3 @@
+local ChatFrame = game:GetService("Players").LocalPlayer.PlayerGui.Chat.Frame 
+ChatFrame.ChatChannelParentFrame.Visible = true 
+ChatFrame.ChatBarParentFrame.Position = ChatFrame.ChatChannelParentFrame.Position + UDim2.new(UDim.new(), ChatFrame.ChatChannelParentFrame.Size.Y)
