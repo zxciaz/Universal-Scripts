@@ -1,4 +1,3 @@
-  
 local LocalP = game:GetService("Players").LocalPlayer
 local Uis = game:GetService("UserInputService")
 local Infjump = true 
