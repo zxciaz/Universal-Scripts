@@ -6,4 +6,4 @@ getgenv().Notify = function(title, text, icon, time)
         Duration = time;
     })
 end
-Notify("Title here", "Text here", "Icon assetid here", 5) -- Can be any number (how long the notification lasts)
+ -- Example: Notify("Title here", "Text here", "Icon assetid here", 5) -- Can be any number (how long the notification lasts)
