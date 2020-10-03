@@ -1,0 +1,81 @@
+-- //Made by the homie slieepy just putting it on here for him
+local ScreenGui = Instance.new("ScreenGui")
+local baccframe = Instance.new("Frame")
+local title = Instance.new("TextLabel")
+local SpeedValue = Instance.new("TextBox")
+local Submit = Instance.new("TextButton")
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ResetOnSpawn = false
+
+baccframe.Name = "baccframe"
+baccframe.Parent = ScreenGui
+baccframe.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+baccframe.BorderSizePixel = 0
+baccframe.Position = UDim2.new(0.753974259, 0, 0.726044238, 0)
+baccframe.Size = UDim2.new(0, 294, 0, 195)
+baccframe.Active = true
+baccframe.Draggable = true
+
+title.Name = "title"
+title.Parent = baccframe
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 0.970
+title.BorderSizePixel = 0
+title.Size = UDim2.new(0, 294, 0, 34)
+title.Font = Enum.Font.GothamSemibold
+title.Text = "Sleepy's Blinkspeed GUI"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 25.000
+
+SpeedValue.Name = "SpeedValue"
+SpeedValue.Parent = baccframe
+SpeedValue.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+SpeedValue.BorderSizePixel = 0
+SpeedValue.Position = UDim2.new(0.159863949, 0, 0.2871795, 0)
+SpeedValue.Size = UDim2.new(0, 200, 0, 32)
+SpeedValue.Font = Enum.Font.GothamSemibold
+SpeedValue.PlaceholderText = "Number Here"
+SpeedValue.Text = ""
+SpeedValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+SpeedValue.TextSize = 25.000
+SpeedValue.TextXAlignment = Enum.TextXAlignment.Left
+
+Submit.Name = "Submit"
+Submit.Parent = baccframe
+Submit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Submit.BackgroundTransparency = 0.980
+Submit.Position = UDim2.new(0.316326529, 0, 0.641025662, 0)
+Submit.Size = UDim2.new(0, 108, 0, 31)
+Submit.Font = Enum.Font.GothamSemibold
+Submit.Text = "Set"
+Submit.TextColor3 = Color3.fromRGB(255, 255, 255)
+Submit.TextSize = 20.000
+
+local plr = game:GetService("Players").LocalPlayer
+local char = plr.Character
+local mouse = game:GetService("Players").LocalPlayer:GetMouse()
+local hum = char:FindFirstChild("HumanoidRootPart")
+
+Submit.MouseButton1Down:connect(function()
+local plr = game:GetService("Players").LocalPlayer
+local char = plr.Character
+local hum = char:FindFirstChild("HumanoidRootPart")
+local usi = game:GetService("UserInputService")
+usi.InputBegan:Connect(function(press)
+if press.KeyCode == Enum.KeyCode.LeftShift then
+loop = true
+      while loop do
+          hum.CFrame = hum.CFrame + hum.CFrame.lookVector * SpeedValue.Text
+          wait()
+      end
+end
+end)
+end)
+
+local usi = game:GetService("UserInputService")
+usi.InputEnded:Connect(function(press)
+if press.KeyCode == Enum.KeyCode.LeftShift then
+      loop = false
+  end
+end)
