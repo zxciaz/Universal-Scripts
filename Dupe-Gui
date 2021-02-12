@@ -1,0 +1,119 @@
+-- NOT MINE
+
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
+local TextButton = Instance.new("TextButton")
+local TextLabel_2 = Instance.new("TextLabel")
+
+--Properties:
+
+ScreenGui.Parent = game.CoreGui
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+Frame.Position = UDim2.new(0.785645008, 0, 0.481973439, 0)
+Frame.Size = UDim2.new(0, 201, 0, 169)
+Frame.BorderSizePixel = 0
+Frame.Active = true
+Frame.Draggable = true
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0.233830854, 0, 0.035502959, 0)
+TextLabel.Size = UDim2.new(0, 106, 0, 23)
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.Text = "DUPE GUI"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 25.000
+
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.189054728, 0, 0.284023672, 0)
+TextBox.Size = UDim2.new(0, 125, 0, 34)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.PlaceholderColor3 = Color3.fromRGB(235, 235, 235)
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.TextSize = 35.000
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.0845771134, 0, 0.538461506, 0)
+TextButton.Size = UDim2.new(0, 165, 0, 50)
+TextButton.Font = Enum.Font.SourceSansBold
+TextButton.Text = "DUPLICATE"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 25.000
+TextButton.MouseButton1Click:connect(function()
+		local ME = game.Players.LocalPlayer
+	local LOOP_NUM = ""..TextBox.Text..""
+	local tools, pos, pos1 = {}, ME.Character.HumanoidRootPart.CFrame, CFrame.new(math.random(-2e5, 2e5), 2e5, math.random(-2e5, 2e5))
+	for _ = 1, tonumber(tonumber(LOOP_NUM) or 1) do
+	    ME.Character.HumanoidRootPart.CFrame = pos1
+	    wait(.2)
+	    ME.Character.HumanoidRootPart.Anchored = true
+	    wait(.2)
+	    ME.Character.Humanoid:UnequipTools()
+	    for _, v in pairs(ME:FindFirstChildOfClass("Backpack"):GetChildren()) do
+	        if v:IsA("Tool") and v:FindFirstChild("Handle") then
+	            v.Parent = ME.Character
+	            v.Handle.Anchored = true
+	            v.Parent = workspace
+	            table.insert(tools, v)
+	        end
+	    end
+	    ME.Character:FindFirstChildOfClass("Humanoid"):ChangeState(15)
+	    ME.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = pos
+	end
+	if type(firetouchinterest) == "function" then
+	    for _, v in pairs(tools) do
+	        pcall(coroutine.wrap(function()
+	            v.Handle.Anchored = false
+	            firetouchinterest(v.Handle, ME.Character:WaitForChild("HumanoidRootPart"), 0)
+	            repeat
+	                wait()
+	            until v.Parent == ME.Character
+	            firetouchinterest(v.Handle, ME.Character.HumanoidRootPart, 1)
+	        end))
+	    end
+	else
+	    ME.Character.HumanoidRootPart.Anchored = true
+	    wait(.15)
+	    for _, v in pairs(tools) do
+	        spawn(function()
+	            v.Handle.Anchored = false
+	            while v.Parent ~= ME.Character and game:GetService("RunService").RenderStepped:Wait() do
+	                v.Handle.CFrame = ME.Character:WaitForChild("HumanoidRootPart").CFrame
+	            end
+	        end)
+	    end
+	    wait((function(num)
+	        local e = 0
+	        for _ = 1, num do
+	            e = e + .1
+	        end
+	        return e
+	    end)(#tools))
+	    ME.Character.HumanoidRootPart.Anchored = false
+	end
+end)
+
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.Position = UDim2.new(0.343283594, 0, 0.875739634, 0)
+TextLabel_2.Size = UDim2.new(0, 60, 0, 15)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "credits to infinite yield for dupe"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextSize = 14.000
