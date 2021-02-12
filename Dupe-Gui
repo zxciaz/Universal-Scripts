@@ -94,6 +94,7 @@ TextButton.MouseButton1Click:connect(function()
 	            v.Handle.Anchored = false
 	            while v.Parent ~= ME.Character and game:GetService("RunService").RenderStepped:Wait() do
 	                v.Handle.CFrame = ME.Character:WaitForChild("HumanoidRootPart").CFrame
+			v.Parent = Client.Backpack
 	            end
 	        end)
 	    end
