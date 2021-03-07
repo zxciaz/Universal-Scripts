@@ -208,4 +208,5 @@ Players.PlayerRemoving:Connect(function(Player)
     end
 end)
  
+Notify("xaxa", "PRESS F9 FOR THE FUCKING COMMANDS", "", 3)
 Notify("xaxa", "Script loaded in: "..string.sub(tostring(tick() - LoadingTime), 1, 6), "", 3)
